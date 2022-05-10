@@ -4,7 +4,7 @@ from app.controllers import endpoint_bp
 from app.services import UserService
 
 
-@endpoint_bp.route('/user/new', methods=['PUT'])
+@endpoint_bp.route('/backend/user/new', methods=['PUT'])
 def add_user():
     content = request.json
 
@@ -14,13 +14,13 @@ def add_user():
     else:
         return "Bad request: missing user.", 400
 
-@endpoint_bp.route('/user/all', methods=['GET'])
+@endpoint_bp.route('/backend/user/all', methods=['GET'])
 def get_all():
     return jsonify(UserService.get_all()), 200
 
 
 
-@endpoint_bp.route('/login', methods=['POST'])
+@endpoint_bp.route('/backend/login', methods=['POST'])
 def login():
     content = request.json
 
