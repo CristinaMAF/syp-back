@@ -1,4 +1,4 @@
-""" Game Service """
+""" User Service """
 from flask import current_app as app
 from app.models import UserModel
 
@@ -13,6 +13,10 @@ class UserService(object):
     @staticmethod
     def get_all():
         return UserModel.get_all()
+
+    @staticmethod
+    def delete_user(username):
+        return UserModel.delete_user(username)
 
     @staticmethod
     def get_user(username, password):

@@ -1,4 +1,4 @@
-""" Base application's controller for games interaction """
+""" Base application's controller for user interaction """
 from flask import request, jsonify
 from app.controllers import endpoint_bp
 from app.services import UserService
@@ -18,6 +18,14 @@ def add_user():
 def get_all():
     return jsonify(UserService.get_all()), 200
 
+@endpoint_bp.route('/backend/user/delete/<string:username>', methods=['DELETE'])
+def delete_user(username):
+
+    if username:
+        UserService.delete_user(username)
+        return {}, 200
+    else:
+        return "Bad request: missing username.", 400
 
 
 @endpoint_bp.route('/backend/login', methods=['POST'])

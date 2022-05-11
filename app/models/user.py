@@ -3,7 +3,7 @@ from app import db
 
 
 class User(db.Model):
-    """ Entity for saving the users games """
+    """ Entity for saving the users"""
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64))
     username = db.Column(db.String(16), unique= True)
@@ -21,6 +21,11 @@ class UserModel(object):
     @staticmethod
     def get_all():
         return  [{"id": user.id, "name": user.name, "username": user.username, "password": user.password} for user in User.query.all() ] 
+
+    @staticmethod
+    def delete_user(username):
+        db.session.query(User).filter_by(username= username).delete() 
+        db.session.commit()
 
     @staticmethod
     def get_user(username, password):
