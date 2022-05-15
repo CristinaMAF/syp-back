@@ -1,6 +1,7 @@
 """Gallery entity  """
 
 from email.policy import default
+from select import select
 from app import db
 
 
@@ -20,5 +21,19 @@ class GalleryModel(object):
         return {"id": new_photo.id, "username": new_photo.username, "photoname": new_photo.photoname}
 
     @staticmethod
+    def get_all_photos(username):
+        return [gallery.photoname for gallery in db.session.query(Gallery).filter_by(username= username).all()]
+
+    @staticmethod
     def get_gallery(username):
-        return db.session.query(Gallery.photoname).filter_by(username= username).all()
+        return [{"id": gallery.id, "username": gallery.username, "photoname": gallery.photoname, "selected": gallery.selected} for gallery in db.session.query(Gallery).filter_by(username= username).all()]
+
+
+    @staticmethod
+    def update_selected(id, selected):
+        db.session.query(Gallery).filter_by(id= id).update({"selected": selected}) 
+        db.session.commit()
+
+    @staticmethod
+    def count_selected(username):
+        return db.session.query(Gallery).filter_by(username=username, selected=True).count()

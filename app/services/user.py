@@ -1,6 +1,8 @@
 """ User Service """
 from flask import current_app as app
-from app.models import UserModel
+from app.models import UserModel, GalleryModel
+import os
+import errno
 
 
 class UserService(object):
@@ -8,11 +10,20 @@ class UserService(object):
 
     @staticmethod
     def add_user(name, username, password):
-       return UserModel.add_user(name, username, password)
+       user = UserModel.add_user(name, username, password)
+       user_dir = os.path.join(app.config.get("IMAGES_BASE_DIR"), username)
+       os.mkdir(user_dir)
+       return user
     
     @staticmethod
     def get_all():
-        return UserModel.get_all()
+        users = UserModel.get_all()
+
+        for user in users:
+            user["selectedPhotos"] = GalleryModel.count_selected(user.get("username"))
+        
+        return users
+
 
     @staticmethod
     def delete_user(username):
