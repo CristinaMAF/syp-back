@@ -12,7 +12,7 @@ class UserService(object):
     def add_user(name, username, password):
        user = UserModel.add_user(name, username, password)
        user_dir = os.path.join(app.config.get("IMAGES_BASE_DIR"), username)
-       os.mkdir(user_dir)
+       os.makedirs(user_dir)
        return user
     
     @staticmethod

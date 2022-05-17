@@ -25,7 +25,7 @@ def get_gallery(username):
 
 @endpoint_bp.route('/backend/gallery/<string:username>/<string:photoname>')
 def get_image(username, photoname):
-    photo_path = os.path.join(app.config.get("IMAGES_BASE_DIR"), f"{username}/{photoname}")
+    photo_path = os.path.join(app.config.get("IMAGES_BASE_DIR"), username, photoname)
     return send_file(photo_path, mimetype='image')
 
 
