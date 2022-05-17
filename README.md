@@ -1,6 +1,6 @@
-# Mastermind game API implementation
+# Select your photos API implementation
 
-Lightweight Python Flask API for implementing the mastermind game.
+Lightweight Python Flask API for implementing the Slect your photos back.
 
 
 # Getting Started
@@ -20,8 +20,8 @@ The App needs to set the following variables:
 
 This APP requires Python 3.X. In the App directory:
 
-1. `$ git clone https://github.com/juancargm/master-mind.git`.
-2. `cd master-mind`.
+1. `$ git clone https://github.com/Develooser/syp-back.git`.
+2. `cd `.
 3. `$ pip install virtualenv` (if not installed).
 4. `$ virtualenv venv`.
 5. `$ .\venv\Scripts\activate.bat` | `source venv/bin/activate`.
