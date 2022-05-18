@@ -4,6 +4,8 @@ from app.models import UserModel, GalleryModel
 import os
 import errno
 
+from app.services.gallery import GalleryService
+
 
 class UserService(object):
     """ Service for the User entity """
@@ -27,7 +29,10 @@ class UserService(object):
 
     @staticmethod
     def delete_user(username):
-        return UserModel.delete_user(username)
+        delete_user= UserModel.delete_user(username)
+        GalleryService.delete_dir(username)
+        return delete_user
+
 
     @staticmethod
     def get_user(username, password):

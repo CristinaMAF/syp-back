@@ -3,6 +3,9 @@ from flask import request, jsonify
 from app.controllers import endpoint_bp
 from app.services import UserService
 
+# @endpoint_bp.before_app_first_request
+# def create_admin():
+    
 
 @endpoint_bp.route('/backend/user/new', methods=['PUT'])
 def add_user():

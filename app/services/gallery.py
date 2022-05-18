@@ -1,6 +1,7 @@
 """ Gallery Service """
 import os
 import cv2
+import shutil
 
 from flask import current_app as app
 from app.models import GalleryModel
@@ -32,3 +33,8 @@ class GalleryService(object):
     @staticmethod
     def count_selected(username):
         return GalleryModel.count_selected(username)
+
+    @staticmethod
+    def delete_dir(username):
+        user_dir = os.path.join(app.config.get("IMAGES_BASE_DIR"), username)
+        shutil.rmtree(user_dir)

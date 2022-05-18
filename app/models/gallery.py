@@ -2,14 +2,17 @@
 
 from email.policy import default
 from select import select
+
+from sqlalchemy import ForeignKey
 from app import db
+
 
 
 class Gallery(db.Model):
    """Entity for saving the galleries"""
    id = db.Column(db.Integer, primary_key=True)
-   username = db.Column(db.String(16))
-   photoname = db.Column(db.String(32), unique= True)
+   username = db.Column(db.String(16), ForeignKey('user.username'))
+   photoname = db.Column(db.String(32))
    selected = db.Column(db.Boolean, default= False)
 
 class GalleryModel(object):
