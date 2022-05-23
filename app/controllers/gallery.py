@@ -5,11 +5,12 @@ from flask import request, jsonify, send_file
 from flask import current_app as app
 from app.controllers import endpoint_bp
 from app.services import GalleryService
+from flask_jwt_extended import jwt_required
 
 
 @endpoint_bp.route('/backend/gallery/new', methods=['POST'])
+@jwt_required()
 def add_photo():
-    content = request.json
     photo = request.files['file']
     username = request.form['username']
 
@@ -20,6 +21,7 @@ def add_photo():
         return "Bad request: missing user.", 400
 
 @endpoint_bp.route('/backend/gallery/all/<string:username>', methods=['GET'])
+@jwt_required()
 def get_gallery(username):
     return jsonify(GalleryService.get_gallery(username)), 200
 
@@ -30,12 +32,9 @@ def get_image(username, photoname):
 
 
 @endpoint_bp.route('/backend/gallery/select', methods=['POST'])
+@jwt_required()
 def update_selected():
     content = request.json
     if content.get('id') and content.get('selected') is not None:
         GalleryService.update_selected(content.get('id'), content.get('selected'))
     return {}, 200
-
-@endpoint_bp.route('/backend/gallery/count', methods=['GET'])
-def count_selected(username):
-    return jsonify(GalleryService.count_selected(username)), 200

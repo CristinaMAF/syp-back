@@ -1,6 +1,7 @@
 """ Initialize Application. """
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_jwt_extended import JWTManager
 
 
 db = SQLAlchemy()
@@ -11,6 +12,7 @@ def init_app() -> Flask:
     app = Flask(__name__, instance_relative_config=False)
     app.config.from_object('config.Config')
 
+    jwt = JWTManager(app)
     db.init_app(app)
 
     with app.app_context():

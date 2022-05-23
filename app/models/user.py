@@ -2,6 +2,7 @@
 from app import db
 from app.models.gallery import Gallery
 from sqlalchemy import event
+from flask import current_app as app
 
 
 class User(db.Model):
@@ -38,7 +39,8 @@ class UserModel(object):
     # Method to take the username and password from database
     @staticmethod
     def get_user(username, password):
-        return db.session.query(User).filter_by(username= username, password= password).all()
+        user = db.session.query(User).filter_by(username= username, password= password).scalar()
+        return {"username": user.username, "token": None, "isAdmin": user.username == app.config.get("ADMIN_USER")}
 
 
 # Create an admin user on database inicialization

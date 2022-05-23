@@ -2,7 +2,6 @@
 from flask import current_app as app
 from app.models import UserModel, GalleryModel
 import os
-import errno
 
 from app.services.gallery import GalleryService
 
