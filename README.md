@@ -11,6 +11,7 @@ Lightweight Python Flask API for implementing the Slect your photos back.
 The App needs to set the following variables:
 
 * FLASK_APP: **(required)** run.py.
+* JWTSECRETKEY: token generator
 * IMAGES_BASE_DIR: directory for save the upload photos
 * SQLALCHEMY_DATABASE_URI: database URL, if not specified a local sql-lite database will be used to avoid losing items due to an unexpected server shutdown.
 
