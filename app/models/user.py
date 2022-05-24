@@ -27,7 +27,7 @@ class UserModel(object):
     # Method to take all users from database
     @staticmethod
     def get_all():
-        return  [{"id": user.id, "name": user.name, "username": user.username, "password": user.password} for user in User.query.all() ] 
+        return  [{"id": user.id, "name": user.name, "username": user.username, "password": user.password} for user in User.query.filter(User.username != app.config.get("ADMIN_USER")).all() ] 
 
     # Method to delete an user and his gallery
     @staticmethod
