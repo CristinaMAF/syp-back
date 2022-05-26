@@ -1,4 +1,5 @@
 """ Application config variables. """
+from datetime import timedelta
 import os
 
 
@@ -11,6 +12,8 @@ class Config:
 
     # SQL Alchemy
     JWT_SECRET_KEY = 'Select-your-photos'
+    JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=24)
+    JWT_REFRESH_TOKEN_EXPIRES = timedelta(hours=24)
     ADMIN_USER = 'admin'
     IMAGES_BASE_DIR = os.path.join(basedir, 'resources', 'images')
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', f"sqlite:///{os.path.join(basedir, 'app.db')}")
